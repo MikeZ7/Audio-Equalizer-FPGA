@@ -1,0 +1,608 @@
+
+*** Running vivado
+    with args -log design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.tcl
+
+
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 429.207 ; gain = 95.848
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/Engineering/ip_repo/audio_IP_1_0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.2/data/ip'.
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1
+Command: synth_design -top design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 -part xc7z010clg400-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 9704
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [C:/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1247.367 ; gain = 407.992
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1' [c:/Users/Engineering/projekt_sdup/projekt_sdup.gen/sources_1/bd/design_AdjustCoeffsAXI/ip/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1/synth/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.vhd:92]
+	Parameter C_S_AXI_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXI_ADDR_WIDTH bound to: 8 - type: integer 
+INFO: [Synth 8-3491] module 'myip_v1_0_S00_AXI' declared at 'C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemWithFilterAXI.vhd:5' bound to instance 'U0' of component 'myip_v1_0_S00_AXI' [c:/Users/Engineering/projekt_sdup/projekt_sdup.gen/sources_1/bd/design_AdjustCoeffsAXI/ip/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1/synth/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.vhd:174]
+INFO: [Synth 8-638] synthesizing module 'myip_v1_0_S00_AXI' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemWithFilterAXI.vhd:98]
+INFO: [Synth 8-638] synthesizing module 'AudioProcessingSystem_Filter' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:33]
+	Parameter THRESHOLD bound to: 20000 - type: integer 
+INFO: [Synth 8-3491] module 'noise_gate' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/noise_gate.vhd:5' bound to instance 'noise_gate_left_channel' of component 'noise_gate' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:178]
+INFO: [Synth 8-638] synthesizing module 'noise_gate' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/noise_gate.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'noise_gate' (0#1) [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/noise_gate.vhd:17]
+	Parameter THRESHOLD bound to: 20000 - type: integer 
+INFO: [Synth 8-3491] module 'noise_gate' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/noise_gate.vhd:5' bound to instance 'noise_gate_right_channel' of component 'noise_gate' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:189]
+	Parameter THRESHOLD bound to: 524288 - type: integer 
+	Parameter RATIO_SHIFT bound to: 1 - type: integer 
+	Parameter ATTACK_RATE bound to: 5000 - type: integer 
+	Parameter RELEASE_RATE bound to: 1000 - type: integer 
+INFO: [Synth 8-3491] module 'compressor_simple' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/compressor_simple.vhd:5' bound to instance 'compresor_left_channel' of component 'compressor_simple' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:276]
+INFO: [Synth 8-638] synthesizing module 'compressor_simple' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/compressor_simple.vhd:18]
+WARNING: [Synth 8-3819] Generic 'attack_rate' not present in instantiated entity will be ignored [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:276]
+WARNING: [Synth 8-3819] Generic 'release_rate' not present in instantiated entity will be ignored [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:276]
+INFO: [Synth 8-256] done synthesizing module 'compressor_simple' (0#1) [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/compressor_simple.vhd:18]
+	Parameter THRESHOLD bound to: 524288 - type: integer 
+	Parameter RATIO_SHIFT bound to: 1 - type: integer 
+	Parameter ATTACK_RATE bound to: 5000 - type: integer 
+	Parameter RELEASE_RATE bound to: 1000 - type: integer 
+INFO: [Synth 8-3491] module 'compressor_simple' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/compressor_simple.vhd:5' bound to instance 'compresor_right_channel' of component 'compressor_simple' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:290]
+INFO: [Synth 8-3491] module 'audiosystem' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/audiosystem.vhd:9' bound to instance 'I2S_block' of component 'audiosystem' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:305]
+INFO: [Synth 8-638] synthesizing module 'audiosystem' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/audiosystem.vhd:39]
+INFO: [Synth 8-3491] module 'i2s_rxtx' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/i2s_rxtx.vhd:12' bound to instance 'rxtx' of component 'i2s_rxtx' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/audiosystem.vhd:114]
+INFO: [Synth 8-638] synthesizing module 'i2s_rxtx' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/i2s_rxtx.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'i2s_rxtx' (0#1) [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/i2s_rxtx.vhd:36]
+INFO: [Synth 8-256] done synthesizing module 'audiosystem' (0#1) [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/audiosystem.vhd:39]
+INFO: [Synth 8-3491] module 'filter_cascade_iir_N11' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/filter_cascade_iir_N11.vhd:5' bound to instance 'eq_left' of component 'filter_cascade_iir_N11' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:361]
+INFO: [Synth 8-638] synthesizing module 'filter_cascade_iir_N11' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/filter_cascade_iir_N11.vhd:21]
+INFO: [Synth 8-638] synthesizing module 'IIR' [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/IIR.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'IIR' (0#1) [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/IIR.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'filter_cascade_iir_N11' (0#1) [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/filter_cascade_iir_N11.vhd:21]
+INFO: [Synth 8-3491] module 'filter_cascade_iir_N11' declared at 'C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/filter_cascade_iir_N11.vhd:5' bound to instance 'eq_right' of component 'filter_cascade_iir_N11' [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:376]
+INFO: [Synth 8-256] done synthesizing module 'AudioProcessingSystem_Filter' (0#1) [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemDirectFilterControl.vhd:33]
+INFO: [Synth 8-256] done synthesizing module 'myip_v1_0_S00_AXI' (0#1) [C:/Users/Engineering/projekt_sdup/projekt_sdup.srcs/sources_1/new/AudioSystemWithFilterAXI.vhd:98]
+INFO: [Synth 8-256] done synthesizing module 'design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1' (0#1) [c:/Users/Engineering/projekt_sdup/projekt_sdup.gen/sources_1/bd/design_AdjustCoeffsAXI/ip/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1/synth/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.vhd:92]
+WARNING: [Synth 8-7129] Port in_l_tx[30] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[29] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[28] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[27] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[26] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[25] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[24] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_l_tx[23] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[30] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[29] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[28] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[27] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[26] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[25] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[24] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port in_r_tx[23] in module audiosystem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWPROT[2] in module myip_v1_0_S00_AXI is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWPROT[1] in module myip_v1_0_S00_AXI is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWPROT[0] in module myip_v1_0_S00_AXI is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ARPROT[2] in module myip_v1_0_S00_AXI is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ARPROT[1] in module myip_v1_0_S00_AXI is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ARPROT[0] in module myip_v1_0_S00_AXI is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1376.785 ; gain = 537.410
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1376.922 ; gain = 537.547
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1376.922 ; gain = 537.547
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.362 . Memory (MB): peak = 1376.922 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1495.465 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.300 . Memory (MB): peak = 1495.465 ; gain = 0.000
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [C:/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:25 ; elapsed = 00:00:25 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'in_shift_reg' and it is trimmed from '64' to '63' bits. [C:/Users/Engineering/FPGA/final_inz/final_inz.srcs/sources_1/new/i2s_rxtx.vhd:67]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   40 Bit       Adders := 16    
+	   3 Input   40 Bit       Adders := 16    
+	   2 Input   32 Bit       Adders := 10    
+	   2 Input    8 Bit       Adders := 1     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	               64 Bit    Registers := 1     
+	               63 Bit    Registers := 1     
+	               40 Bit    Registers := 16    
+	               32 Bit    Registers := 179   
+	               24 Bit    Registers := 2     
+	                8 Bit    Registers := 3     
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 42    
++---Multipliers : 
+	              32x32  Multipliers := 16    
++---Muxes : 
+	   2 Input   64 Bit        Muxes := 1     
+	   4 Input   40 Bit        Muxes := 16    
+	   2 Input   40 Bit        Muxes := 16    
+	   4 Input   32 Bit        Muxes := 34    
+	   2 Input   32 Bit        Muxes := 86    
+	   7 Input    4 Bit        Muxes := 16    
+	   4 Input    2 Bit        Muxes := 32    
+	   8 Input    1 Bit        Muxes := 16    
+	   6 Input    1 Bit        Muxes := 48    
+	   2 Input    1 Bit        Muxes := 30    
+	   7 Input    1 Bit        Muxes := 16    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_in_a_reg is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: A2*B2.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: Generating DSP mult_out0, operation Mode is: (PCIN>>17)+A2*B2.
+DSP Report: register mult_in_b_reg is absorbed into DSP mult_out0.
+DSP Report: register mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+DSP Report: operator mult_out0 is absorbed into DSP mult_out0.
+WARNING: [Synth 8-7129] Port S_AXI_AWPROT[2] in module design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWPROT[1] in module design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_AWPROT[0] in module design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ARPROT[2] in module design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ARPROT[1] in module design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port S_AXI_ARPROT[0] in module design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:53 ; elapsed = 00:00:54 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping      | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 15     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A2*B2            | 18     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | (PCIN>>17)+A2*B2 | 18     | 15     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
++------------+------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:04 ; elapsed = 00:01:05 . Memory (MB): peak = 1495.465 ; gain = 656.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 1519.891 ; gain = 680.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:12 ; elapsed = 00:01:13 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:12 ; elapsed = 00:01:13 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:12 ; elapsed = 00:01:14 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:13 ; elapsed = 00:01:14 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:13 ; elapsed = 00:01:14 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:13 ; elapsed = 00:01:14 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++---------------------------------------------+---------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                                  | RTL Name                                                      | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++---------------------------------------------+---------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 | U0/AudioProcessingSystem_inst/I2S_block/rxtx/in_shift_reg[39] | 9      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1 | U0/AudioProcessingSystem_inst/I2S_block/rxtx/in_shift_reg[7]  | 8      | 1     | NO           | YES                | YES               | 1      | 0       | 
++---------------------------------------------+---------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A'*B' | 30     | 18     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | A'*B'          | 17     | 17     | -      | -      | 48     | 1    | 1    | -    | -    | -     | 0    | 0    | 
+|IIR         | PCIN>>17+A*B'  | 0      | 18     | -      | -      | 48     | 0    | 1    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |CARRY4  |   588|
+|2     |DSP48E1 |    64|
+|3     |LUT1    |   135|
+|4     |LUT2    |  2080|
+|5     |LUT3    |   228|
+|6     |LUT4    |   224|
+|7     |LUT5    |   343|
+|8     |LUT6    |  3070|
+|9     |MUXF7   |   160|
+|10    |SRL16E  |     2|
+|11    |FDRE    |  4888|
+|12    |FDSE    |   124|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:13 ; elapsed = 00:01:14 . Memory (MB): peak = 1533.230 ; gain = 693.855
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 8 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:56 ; elapsed = 00:01:09 . Memory (MB): peak = 1533.230 ; gain = 575.312
+Synthesis Optimization Complete : Time (s): cpu = 00:01:13 ; elapsed = 00:01:15 . Memory (MB): peak = 1533.230 ; gain = 693.855
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.234 . Memory (MB): peak = 1541.926 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 812 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1541.926 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: a1f28715
+INFO: [Common 17-83] Releasing license: Synthesis
+48 Infos, 32 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:20 ; elapsed = 00:01:24 . Memory (MB): peak = 1541.926 ; gain = 1077.965
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Engineering/projekt_sdup/projekt_sdup.runs/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1_synth_1/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1, cache-ID = c89f14b2f91dd398
+INFO: [Coretcl 2-1174] Renamed 26 cell refs.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Engineering/projekt_sdup/projekt_sdup.runs/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1_synth_1/design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1_utilization_synth.rpt -pb design_AdjustCoeffsAXI_myip_v1_0_S00_AXI_0_1_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Jun 16 08:28:05 2025...
