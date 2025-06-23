@@ -222,6 +222,7 @@ def plot_audio_in_vs_out_freq_domain(audio_in, audio_out, fs: int = 48_000):
 
     plt.tight_layout()
     plt.show()
+    return mag_in, mag_out
 
 def _json_to_sos(json_path: str | Path) -> np.ndarray:
     """Reads JSON file and returns SOS matrix (shape = [n_sections, 6])."""
@@ -249,7 +250,7 @@ def filter_and_plot(
     json_path: str | Path,
     signal: Sequence[float] | np.ndarray,
     fs: int = 48_000,
-    preview_ms: int = 15, plot: bool = True
+    preview_ms: int = 15, plot: bool = True, demo: bool = False
 ) -> Tuple[np.ndarray, float]:
     """
     Filters `signal` with IIR cascade from JSON file and plots before/after.
@@ -272,18 +273,29 @@ def filter_and_plot(
     t0 = time.perf_counter()
     y = sosfilt(sos, x)
     elapsed = time.perf_counter() - t0
-    
+
+    if demo==True:
+
+        plt.plot(x, label="IN")
+        plt.plot(y, label="OUT")
+#         plt.set_xlabel("Time [ms]")
+        plt.set_ylabel("Amplitude")
+        plt.set_title(f"Before vs after filtering")
+        plt.grid(True)
+        plt.legend()
+        plt.show()
+
     if plot==True:
         # ---------- 1. Plot Time Domain -----------------------
         n_prev = int(fs * preview_ms / 1000)
         t_axis = np.arange(n_prev) / fs * 1e3  # [ms]
 
         fig, (ax0, ax1, ax2) = plt.subplots(3, 1, figsize=(10, 10), sharex=False)
-        ax0.plot(x, label="input")
-        ax0.plot(y, label="filtered")
+        ax0.plot(x, label="IN")
+        ax0.plot(y, label="OUT")
 #         ax0.set_xlabel("Time [ms]")
         ax0.set_ylabel("Amplitude")
-        ax0.set_title(f"First {preview_ms} ms: before vs after filtering")
+        ax0.set_title(f"Before vs after filtering")
         ax0.grid(True)
         ax0.legend()
 
@@ -300,11 +312,11 @@ def filter_and_plot(
         ax1.plot(freqs, X_amp)
         ax2.plot(freqs, Y_amp)
         
-        ax1.set_title("Widmo PRZED filtracją")
+        ax1.set_title("Widmo przed filtracją")
         ax1.set_ylabel("Amplituda [dBFS]")
         ax1.grid(True, which='both')
         
-        ax2.set_title("Widmo PO filtracji")
+        ax2.set_title("Widmo po filtracji")
         ax2.set_ylabel("Amplituda [dBFS]")
         ax2.grid(True, which='both')
         
@@ -340,7 +352,10 @@ def filter_and_plot(
         plt.show()
     
     print(f"Filtering time: {elapsed*1e3:.2f} ms")
-    return y, elapsed
+    return y, Y_amp, elapsed
+
+
+
 
 # SLIDERS CODE
 # ------------------------------------------------------------------
@@ -408,3 +423,110 @@ apply_btn.on_click(on_apply)
 
 ui = w.VBox([fc_slider, Q_slider, gain_slider, apply_btn])
 
+# -------------------------------------------------------------------
+# COMPARE HW vs SW filters
+
+def bench_filters_against_input(x_t, x_f,
+                                y_hw_t, y_hw_f,
+                                y_sw_t, y_sw_f,
+                                fs=48_000,
+                                title="Filter‑bench"):
+    """
+    Compare hardware and software filter outputs against the raw input.
+
+    Parameters
+    ----------
+    x_t, y_hw_t, y_sw_t : 1‑D float ndarray
+        Input, hardware output and software output – time domain.
+    x_f, y_hw_f, y_sw_f : 1‑D complex ndarray
+        Their corresponding spectra (e.g. rfft).
+        Length must match the FFT of the time‑domain vectors.
+    fs : float
+        Sampling frequency [Hz].
+    title : str
+        Base title added to every plot.
+
+    Returns
+    -------
+    dict
+        {
+          'mse_hw',  'snr_hw',  'max_hw',
+          'mse_sw',  'snr_sw',  'max_sw',
+          'mse_diff','snr_diff','max_diff'
+        }
+    """
+
+    # ── 1. equalise lengths ──────────────────────────────────────────
+    N = min(len(x_t), len(y_hw_t), len(y_sw_t))
+    x_t     = x_t[:N]
+    y_hw_t  = y_hw_t[:N]
+    y_sw_t  = y_sw_t[:N]
+
+    # ── 2. error signals ────────────────────────────────────────────
+    err_hw_t  = y_hw_t - x_t
+    err_sw_t  = y_sw_t - x_t
+    err_diff_t= err_sw_t - err_hw_t           # difference of errors
+
+    # helper
+    def metrics(sig, err):
+        mse  = float(np.mean(err**2))
+        snr  = 10*np.log10(np.mean(sig**2) / mse + 1e-30)
+        mabs = float(np.max(np.abs(err)))
+        return mse, snr, mabs
+
+    mse_hw, snr_hw, max_hw = metrics(x_t, err_hw_t)
+    mse_sw, snr_sw, max_sw = metrics(x_t, err_sw_t)
+    mse_df, snr_df, max_df = metrics(err_hw_t, err_diff_t)  # diff vs hw err
+
+    # ── 3. frequency domain errors ──────────────────────────────────
+    err_hw_f   = y_hw_f - x_f
+    err_sw_f   = y_sw_f - x_f
+    err_diff_f = err_sw_f - err_hw_f
+
+    mag = lambda z: 20*np.log10(np.abs(z) + 1e-12)
+    f_hz = np.fft.rfftfreq(N, 1/fs)
+
+    # ── 4. plots ────────────────────────────────────────────────────
+    fig, axs = plt.subplots(3, 2, figsize=(12, 9))
+
+    # 4a – time‑domain errors
+    axs[0,0].plot(err_hw_t[:2000], label="HW error")
+    axs[0,0].plot(err_sw_t[:2000], label="SW error", alpha=.7)
+    axs[0,0].set_title(f"{title} – error signals (time, first 2 000 samples)")
+    axs[0,0].set_ylabel("Amplitude"); axs[0,0].grid(); axs[0,0].legend()
+
+    # 4b – error difference (time)
+    axs[1,0].plot(err_diff_t[:2000])
+    axs[1,0].set_title("Difference of errors (SW – HW)")
+    axs[1,0].set_ylabel("Amplitude"); axs[1,0].grid()
+
+    # 4c – full frame errors overlay
+    axs[2,0].plot(err_hw_t,  alpha=.6, label="HW err")
+    axs[2,0].plot(err_sw_t,  alpha=.6, label="SW err")
+    axs[2,0].set_title("Errors – full frame"); axs[2,0].grid(); axs[2,0].legend()
+    axs[2,0].set_xlabel("Sample")
+
+    # 4d – magnitude spectra of errors
+    axs[0,1].semilogx(f_hz, mag(err_hw_f),  label="HW error")
+    axs[0,1].semilogx(f_hz, mag(err_sw_f),  label="SW error", alpha=.7)
+    axs[0,1].set_title("Error spectra (dBFS)"); axs[0,1].grid(which='both'); axs[0,1].legend()
+
+    # 4e – magnitude spectrum of error difference
+    axs[1,1].semilogx(f_hz, mag(err_diff_f))
+    axs[1,1].set_title("Spectrum of error difference"); axs[1,1].grid(which='both')
+
+    # 4f – magnitude spectra overlay input vs outputs
+    axs[2,1].semilogx(f_hz, mag(x_f),      label="Input")
+    axs[2,1].semilogx(f_hz, mag(y_hw_f),   label="HW out", alpha=.7)
+    axs[2,1].semilogx(f_hz, mag(y_sw_f),   label="SW out", alpha=.7)
+    axs[2,1].set_title("Signals spectra"); axs[2,1].grid(which='both'); axs[2,1].legend()
+    axs[2,1].set_xlabel("Frequency [Hz]")
+
+    plt.tight_layout()
+    plt.show()
+
+    return {
+        "mse_hw": mse_hw, "snr_hw": snr_hw, "max_hw": max_hw,
+        "mse_sw": mse_sw, "snr_sw": snr_sw, "max_sw": max_sw,
+        "mse_diff": mse_df, "snr_diff": snr_df, "max_diff": max_df,
+    }
