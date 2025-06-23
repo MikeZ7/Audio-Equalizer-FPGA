@@ -273,6 +273,7 @@ def filter_and_plot(
     t0 = time.perf_counter()
     y = sosfilt(sos, x)
     elapsed = time.perf_counter() - t0
+    Y_a = None
 
     if demo==True:
 
