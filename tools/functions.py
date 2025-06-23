@@ -15,8 +15,8 @@ from IPython.display import display
 # CONSTANTS / UTILS
 fs = 48_000
 Ts = 1 / fs
-n_sections = 8                 # liczba bi-quadów w kaskadzie
-json_path  = "filters.json"    # plik wyjściowy
+n_sections = 8                 # filter count in cascade
+json_path  = "filters.json"    # output file
 
 REG_OFFSET = {           # coefficient → index 0-4
     "b0": 0,   # reg  0–7
@@ -33,7 +33,7 @@ NFRAME  = 1024       # words 64-bit for frame  (must be = G_SAMPLES_PER_FRAME)
 BYTES_PER_WORD = 8   # 64-bit - capturing 2 audio channels each 32-bit
 
 def load_mmio(mmio_obj: MMIO):
-    """Przekaż wcześniej utworzony obiekt MMIO do tego modułu."""
+    """Pass MMIO object to this module."""
     global _MMIO
     _MMIO = mmio_obj
 
@@ -123,7 +123,7 @@ def capture_audio_from_channels(dma_in, dma_out, ncycles: int = NCYCLES, nframe:
 
 # --- DELETE DUPLICATES --------------------------------------------------
 def delete_duplicates(arr_l, arr_r):
-    """Usuń następujące po sobie próbki identyczne jednocześnie w L i R."""
+    """Delete consecutive identical samples in L and R."""
     mask = np.empty_like(arr_l, dtype=bool)
     mask[0]   = True
     mask[1:]  = (arr_l[1:] != arr_l[:-1]) | (arr_r[1:] != arr_r[:-1])
@@ -144,19 +144,19 @@ def plot_audio_in_vs_out_time_domain(audio_in, audio_out):
     plt.grid(); plt.legend(); plt.show()
 
 def plot_audio_in_vs_out_freq_domain(audio_in, audio_out, fs: int = 48_000):
-    
-    # --- Parametry FFT -------------------------------------------------
+
+    # --- FFT Parameters -------------------------------------------------
     N_in   = len(audio_in)
     N_out   = len(audio_out)
     
     window_in = np.hanning(N_in)                        
     window_out = np.hanning(N_out)
 
-    # FFT sygnału PRZED filtracją
+    # FFT before filtering
     fft_in  = np.fft.rfft(audio_in * window_in)
     mag_in  = 20 * np.log10(np.abs(fft_in) + 1e-12)
-    
-    # FFT sygnału PO filtracji
+
+    # FFT after filtering
     fft_out = np.fft.rfft(audio_out * window_out)
     mag_out = 20 * np.log10(np.abs(fft_out) + 1e-12)
 
@@ -185,34 +185,33 @@ def plot_audio_in_vs_out_freq_domain(audio_in, audio_out, fs: int = 48_000):
     ax2.grid(True, which='both')
     
     for ax in (ax1, ax2):
-        ax.set_xlim(0, 20_000)                       # osi X kończy się na 20 kHz
-        ax.xaxis.set_major_locator(MultipleLocator(1000))   # główne co 1000 Hz
-        ax.xaxis.set_minor_locator(MultipleLocator(500))    # pomocnicze co 500 Hz (opcjonalnie)
-
-        # (opcjonalnie) ładniejszy zapis etykiet w kHz zamiast Hz
+        ax.set_xlim(0, 20_000)                       # X axis ends at 20 kHz
+        ax.xaxis.set_major_locator(MultipleLocator(1000))   # major ticks every 1000 Hz
+        ax.xaxis.set_minor_locator(MultipleLocator(500))    # minor ticks every 500 Hz (optional)
+        # X axis formatter
         ax.xaxis.set_major_formatter(
             FuncFormatter(lambda v, _: f"{int(v/1000)} k" if v >= 1000 else f"{int(v)}")
         )
 
-    # ------------ czerwone linie + dwuwierszowy podpis ---------------
+    # ------------ red lines + two-line label ---------------
     markers = [2000, 5000]                 # [Hz]
 
     for f_mark in markers:
-        # indeks najbliższego binu
+        # index of the nearest bin
         idx = np.argmin(np.abs(freqs_in - f_mark))
 
-        # amplitudy dla obu osi
+        # amplitudes for both axes
         amp_in  = np.mean(mag_in[idx-5:idx+5])
         amp_out = np.mean(mag_out[idx-5:idx+5])
 
-        # wspólna pozycja X i format częstotliwości „2 k”, „5 k”
+        # common X position and frequency format "2 k", "5 k"
         label_freq = f"{int(f_mark/1000)} k"
 
-        # linia pionowa
+        # vertical line
         for ax in (ax1, ax2):
             ax.axvline(f_mark, color='red', linestyle='--', linewidth=1)
 
-        # podpisy — osobny tekst na każdym wykresie, z odpowiednią amplitudą
+        # labels — separate text on each plot, with the appropriate amplitude
         ax1.text(f_mark, ax1.get_ylim()[1] - 3,
                 f"{label_freq}\n{amp_in:.1f} dB",
                 color='red', ha='center', va='top', fontsize=9)
@@ -225,7 +224,7 @@ def plot_audio_in_vs_out_freq_domain(audio_in, audio_out, fs: int = 48_000):
     plt.show()
 
 def _json_to_sos(json_path: str | Path) -> np.ndarray:
-    """Wczytuje plik JSON i zwraca macierz SOS (shape = [n_sections, 6])."""
+    """Reads JSON file and returns SOS matrix (shape = [n_sections, 6])."""
     with open(json_path, "r", encoding="utf-8") as f:
         cfg = json.load(f)
 
@@ -253,19 +252,19 @@ def filter_and_plot(
     preview_ms: int = 15, plot: bool = True
 ) -> Tuple[np.ndarray, float]:
     """
-    Filtruje `signal` kaskadą IIR z pliku JSON i rysuje przed/po.
+    Filters `signal` with IIR cascade from JSON file and plots before/after.
 
     Parameters
     ----------
-    json_path  : plik z opisem filtrów
-    signal     : lista / ndarray z próbkami
-    fs         : częstotliwość próbkowania [Hz]
-    preview_ms : ile milisekund pokazać w dziedzinie czasu
+    json_path  : filter description file
+    signal     : list / ndarray with samples
+    fs         : sampling frequency [Hz]
+    preview_ms : how many milliseconds to show in time domain
 
     Returns
     -------
-    y        : sygnał po filtracji
-    elapsed  : czas filtracji [s]
+    y        : filtered signal
+    elapsed  : filtering time [s]
     """
     x = np.asarray(signal, dtype=np.float64)
     sos = _json_to_sos(json_path)
@@ -275,7 +274,7 @@ def filter_and_plot(
     elapsed = time.perf_counter() - t0
     
     if plot==True:
-        # ---------- 1. wykres w dziedzinie czasu -----------------------
+        # ---------- 1. Plot Time Domain -----------------------
         n_prev = int(fs * preview_ms / 1000)
         t_axis = np.arange(n_prev) / fs * 1e3  # [ms]
 
@@ -288,7 +287,7 @@ def filter_and_plot(
         ax0.grid(True)
         ax0.legend()
 
-        # ---------- 2. wykres widma (dB) -------------------------------
+        # ---------- 2. Plot Frequency Domain (dB) -------------------------------
         N_fft = len(x)
         window = np.hanning(N_fft)
         X = np.fft.rfft(x[:N_fft] * window)
@@ -319,10 +318,10 @@ def filter_and_plot(
         markers = [2000, 5000]                 # [Hz]
         
         for f_mark in markers:
-            # indeks najbliższego binu
+            # index of the nearest bin
             idx = np.argmin(np.abs(freqs - f_mark))
 
-            # średnia amplituda (dB) ±5 binów
+            # average amplitude (dB) ±5 bins
             amp_in  = np.mean(X_amp[idx-5:idx+5])
             amp_out = np.mean(Y_amp [idx-5:idx+5])
 
@@ -330,7 +329,7 @@ def filter_and_plot(
             for ax in (ax1, ax2):
                 ax.axvline(f_mark, color='red', linestyle='--', linewidth=1)
 
-            # osobne etykiety nad linią (jeden raz na osi)
+            # separate labels above the line (once per axis)
             ax1.text(f_mark, ax1.get_ylim()[1] - 3,
                      f"{label_freq}\n{amp_in:.1f} dB",
                      color='red', ha='center', va='top', fontsize=9)
@@ -346,7 +345,7 @@ def filter_and_plot(
 # SLIDERS CODE
 # ------------------------------------------------------------------
 def calc_coeffs(fc: float, Q: float, A: float):
-    """Zwraca dict {b0,b1,b2,a1,a2} dla podanych parametrów."""
+    """Returns dict {b0,b1,b2,a1,a2} for given parameters."""
     wc           = 2 * np.pi * fc
     wc_unwarped  = (2 / Ts) * np.tan((Ts / 2) * wc)
     wcT          = wc_unwarped * Ts
@@ -393,7 +392,7 @@ def on_apply(_):
 #     print("✓ Coeffs were uploaded\n")
 
 # ------------------------------------------------------------------
-#  W I D G E T S
+#  WIDGETS
 fc_slider   = w.IntSlider(  min=16,   max=20_000, step=1,
                             value=2000, description="fc [Hz]",
                             continuous_update=False, style={"description_width":"80px"})
